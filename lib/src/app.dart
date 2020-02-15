@@ -1,5 +1,5 @@
-import 'package:basic_form/src/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:basic_form/src/routes/app_routes.dart';
 
 class App extends StatelessWidget {
 
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.pink
       ),
-      home: Home()
+      onGenerateRoute: AppRoutes.routes,
     );
   }
 
