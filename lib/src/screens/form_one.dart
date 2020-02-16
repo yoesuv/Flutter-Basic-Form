@@ -47,6 +47,12 @@ class FormOneState extends State<FormOne> {
     );
   }
 
+  @override
+  void dispose(){
+    bloc.dispose();
+    super.dispose();
+  }
+
   Widget buildInput() {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -69,20 +75,24 @@ class FormOneState extends State<FormOne> {
 
   Widget buildListImage() {
     return Container(
-      width: double.infinity,
-      height: imageSize,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: listImage.length,
-        itemBuilder: (BuildContext context, int index) {
-          final bool isLast = listImage.length == (index+1);
-          final double rightPadding = isLast ? 0.0 : 5.0;
-          return Container(
-            padding: EdgeInsets.only(right: rightPadding),
-            child: InputImage(bloc, listImage[index])
-          );
-        },
-      )
+        width: double.infinity,
+        height: imageSize,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: listImage.length,
+            itemBuilder: (BuildContext context, int index) {
+              final bool isLast = listImage.length == (index+1);
+              final double rightPadding = isLast ? 0.0 : 5.0;
+              return Container(
+                  padding: EdgeInsets.only(right: rightPadding),
+                  child: InputImage(bloc, listImage[index], (File image) {
+                    setState(() {
+                      listImage.add(image);
+                    });
+                  })
+              );
+            }
+        )
     );
   }
 

@@ -17,4 +17,8 @@ class FormOneBloc {
     _resultRequestStoragePermission.sink.add(requestStoragePermission[PermissionGroup.storage]);
   }
 
+  void dispose() {
+    _resultRequestStoragePermission.close();
+  }
+
 }
