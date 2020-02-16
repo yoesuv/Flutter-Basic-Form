@@ -82,10 +82,10 @@ class FormOneState extends State<FormOne> {
             itemCount: listImage.length,
             itemBuilder: (BuildContext context, int index) {
               final bool isLast = listImage.length == (index+1);
-              final double rightPadding = isLast ? 0.0 : 5.0;
+              final double rightPadding = isLast ? 0.0 : 4.0;
               return Container(
                   padding: EdgeInsets.only(right: rightPadding),
-                  child: InputImage(bloc, listImage[index], (File image) {
+                  child: InputImage(index, bloc, listImage[index], (File image) {
                     setState(() {
                       listImage.add(image);
                     });

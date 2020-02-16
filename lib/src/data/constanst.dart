@@ -1,1 +1,2 @@
-const double imageSize = 50.0;
+const double imageSize = 70.0;
+const double iconDeleteSize = 20.0;
