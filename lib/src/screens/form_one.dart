@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:basic_form/src/blocs/form_one_blocs.dart';
 import 'package:basic_form/src/widgets/input_image.dart';
 import 'package:basic_form/src/widgets/my_app_bar.dart';
@@ -57,20 +59,58 @@ class FormOneState extends State<FormOne> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(
-          width: double.infinity,
-          height: 180,
-          child: const Center(
-            child: Text('Add Image'),
-          ),
-          decoration: BoxDecoration(
-            color: Colors.grey[200]
-          ),
-        ),
+        contentTop(),
         const SizedBox(height: 8),
         buildListImage()
       ],
     );
+  }
+
+  Widget contentTop() {
+    return Container(
+      width: double.infinity,
+      height: 190,
+      child: contentImage()
+    );
+  }
+
+  Widget contentImage() {
+    if (listImage.length <= 1) {
+      return Material(
+        color: Colors.grey[200],
+        child: InkWell(
+          child: Center(
+            child: Text('Add Image', style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+            )),
+          ),
+          onTap: () {
+            bloc.checkStoragePermission().then((bool result) {
+              if (result) {
+                bloc.requestStoragePermission();
+                bloc.streamRequestStoragePermission.listen((PermissionStatus status){
+                  if (status == PermissionStatus.granted) {
+                    ImagePicker.pickImage(source: ImageSource.gallery).then((File image){
+                      print('Form One # from main image => $image');
+                      if (image!=null) {
+                        setState(() {
+                          listImage.add(image);
+                        });
+                      }
+                    });
+                  } else {
+
+                  }
+                });
+              }
+            });
+          },
+        ),
+      );
+    } else {
+      return Image.file(listImage[1], fit: BoxFit.cover);
+    }
   }
 
   Widget buildListImage() {
@@ -86,9 +126,12 @@ class FormOneState extends State<FormOne> {
               return Container(
                   padding: EdgeInsets.only(right: rightPadding),
                   child: InputImage(index, bloc, listImage[index], (File image) {
-                      setState(() {
-                        listImage.add(image);
-                      });
+                      print('Form One # from item image => file is $image');
+                      if (image!=null) {
+                        setState(() {
+                          listImage.add(image);
+                        });
+                      }
                     }, (int index) {
                       setState(() {
                         listImage.removeAt(index);
