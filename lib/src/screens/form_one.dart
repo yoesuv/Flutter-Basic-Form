@@ -51,6 +51,7 @@ class FormOneState extends State<FormOne> {
 
   @override
   void dispose(){
+    bloc.drainBloc();
     bloc.dispose();
     super.dispose();
   }
@@ -182,7 +183,7 @@ class FormOneState extends State<FormOne> {
             color: Colors.white
         )),
         onPressed: () {
-
+          bloc.sendData(listImage);
         },
       )
     );

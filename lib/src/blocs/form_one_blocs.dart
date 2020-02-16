@@ -1,5 +1,6 @@
-import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 import 'package:rxdart/rxdart.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FormOneBloc {
 
@@ -19,6 +20,21 @@ class FormOneBloc {
   Future<void> requestStoragePermission() async{
     final Map<PermissionGroup, PermissionStatus> requestStoragePermission = await PermissionHandler().requestPermissions(<PermissionGroup>[PermissionGroup.storage]);
     _resultRequestStoragePermission.sink.add(requestStoragePermission[PermissionGroup.storage]);
+  }
+
+  void sendData(List<File> listImage) {
+    print('===== FormOneBloc # Send Data =====');
+    print('FormOneBloc # list image size : ${listImage.length}');
+    for (final File file in listImage ) {
+      if (file!=null) {
+        print('FormOneBloc # image ${file.path}');
+      }
+    }
+    print('FormOneBloc # name : ${_name.value}');
+  }
+
+  void drainBloc() {
+    _name.value = '';
   }
 
   void dispose() {
