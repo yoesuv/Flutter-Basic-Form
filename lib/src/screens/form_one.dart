@@ -79,7 +79,7 @@ class FormOneState extends State<FormOne> {
           final double rightPadding = isLast ? 0.0 : 5.0;
           return Container(
             padding: EdgeInsets.only(right: rightPadding),
-            child: InputImage(listImage[index])
+            child: InputImage(bloc, listImage[index])
           );
         },
       )

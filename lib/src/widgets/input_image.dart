@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'package:basic_form/src/blocs/form_one_blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:basic_form/src/data/constanst.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class InputImage extends StatelessWidget{
 
-  const InputImage(this.file);
+  const InputImage(this.bloc, this.file);
 
+  final FormOneBloc bloc;
   final File file;
 
   @override
@@ -20,11 +23,28 @@ class InputImage extends StatelessWidget{
                 child: Icon(Icons.add)
             ),
             onTap: () {
-              print('open gallery');
-              },
+              bloc.checkStoragePermission().then((bool result) {
+                if (result) {
+                  openGallery();
+                } else {
+                  bloc.requestStoragePermission();
+                  bloc.streamRequestStoragePermission.listen((PermissionStatus status){
+                    if (status == PermissionStatus.granted) {
+                      openGallery();
+                    } else {
+
+                    }
+                  });
+                }
+              });
+            }
           )
       )
     );
+  }
+
+  void openGallery() {
+    print('Input Image # Open Gallery');
   }
 
 }
