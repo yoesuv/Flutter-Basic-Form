@@ -7,12 +7,13 @@ import 'package:image_picker/image_picker.dart';
 
 class InputImage extends StatelessWidget{
 
-  const InputImage(this.index, this.bloc, this.file, this.callbackPicker(File file));
+  const InputImage(this.index, this.bloc, this.file, this.callbackPicker(File file), this.callbackRemove(int index));
 
   final int index;
   final FormOneBloc bloc;
   final File file;
   final dynamic callbackPicker;
+  final dynamic callbackRemove;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +80,7 @@ class InputImage extends StatelessWidget{
             ),
             onTap: () {
               print('Input Image # delete index $index');
+              callbackRemove(index);
             }
           )
       );

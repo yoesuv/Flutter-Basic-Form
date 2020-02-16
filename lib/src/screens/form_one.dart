@@ -86,10 +86,14 @@ class FormOneState extends State<FormOne> {
               return Container(
                   padding: EdgeInsets.only(right: rightPadding),
                   child: InputImage(index, bloc, listImage[index], (File image) {
-                    setState(() {
-                      listImage.add(image);
-                    });
-                  })
+                      setState(() {
+                        listImage.add(image);
+                      });
+                    }, (int index) {
+                      setState(() {
+                        listImage.removeAt(index);
+                      });
+                    })
               );
             }
         )
