@@ -1,7 +1,11 @@
-import 'package:basic_form/src/blocs/form_one_blocs.dart';
-import 'package:basic_form/src/widgets/my_app_bar.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:basic_form/src/blocs/form_one_blocs.dart';
+import 'package:basic_form/src/widgets/input_image.dart';
+import 'package:basic_form/src/widgets/my_app_bar.dart';
+import 'package:basic_form/src/data/constanst.dart';
 
 class FormOne extends StatefulWidget {
 
@@ -15,10 +19,13 @@ class FormOne extends StatefulWidget {
 class FormOneState extends State<FormOne> {
 
   FormOneBloc bloc;
+  List<File> listImage = <File>[];
 
   @override
   void initState() {
     super.initState();
+    listImage.clear();
+    listImage.add(null);
     bloc = Provider.of<FormOneBloc>(context, listen: false);
   }
 
@@ -42,6 +49,7 @@ class FormOneState extends State<FormOne> {
 
   Widget buildInput() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Container(
           width: double.infinity,
@@ -52,8 +60,29 @@ class FormOneState extends State<FormOne> {
           decoration: BoxDecoration(
             color: Colors.grey[200]
           ),
-        )
+        ),
+        const SizedBox(height: 8),
+        buildListImage()
       ],
+    );
+  }
+
+  Widget buildListImage() {
+    return Container(
+      width: double.infinity,
+      height: imageSize,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: listImage.length,
+        itemBuilder: (BuildContext context, int index) {
+          final bool isLast = listImage.length == (index+1);
+          final double rightPadding = isLast ? 0.0 : 5.0;
+          return Container(
+            padding: EdgeInsets.only(right: rightPadding),
+            child: InputImage(listImage[index])
+          );
+        },
+      )
     );
   }
 
