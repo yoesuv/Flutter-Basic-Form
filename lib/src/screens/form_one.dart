@@ -1,5 +1,7 @@
+import 'package:basic_form/src/blocs/form_one_blocs.dart';
 import 'package:basic_form/src/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FormOne extends StatefulWidget {
 
@@ -11,6 +13,14 @@ class FormOne extends StatefulWidget {
 }
 
 class FormOneState extends State<FormOne> {
+
+  FormOneBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = Provider.of<FormOneBloc>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
