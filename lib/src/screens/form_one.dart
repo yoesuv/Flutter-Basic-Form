@@ -35,8 +35,13 @@ class FormOneState extends State<FormOne> {
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: 150,
-          child: const Text('Input Image'),
+          height: 180,
+          child: const Center(
+            child: Text('Add Image'),
+          ),
+          decoration: BoxDecoration(
+            color: Colors.grey[200]
+          ),
         )
       ],
     );
