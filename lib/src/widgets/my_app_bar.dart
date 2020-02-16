@@ -11,7 +11,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget{
   Widget build(BuildContext context) {
     return
       AppBar(
-      title: Text(title),
+        title: Text(title),
     );
   }
 

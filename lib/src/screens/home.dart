@@ -11,7 +11,9 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: RaisedButton(
-            child: Text('Open Form'),
+            child: const Text('Open Form', style: TextStyle(
+                fontSize: 16
+            )),
             onPressed: () {
               Navigator.pushNamed(context, FormOne.formRoute);
             }

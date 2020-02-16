@@ -8,21 +8,21 @@ class AppRoutes {
 
     switch (settings.name) {
       case '/' :
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) {
             return Home();
           }
         );
         break;
       case FormOne.formRoute:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) {
               return FormOne();
             }
         );
         break;
       default:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) {
               return Home();
             }
