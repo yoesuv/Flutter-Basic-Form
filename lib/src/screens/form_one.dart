@@ -61,7 +61,12 @@ class FormOneState extends State<FormOne> {
       children: <Widget>[
         contentTop(),
         const SizedBox(height: 8),
-        buildListImage()
+        buildListImage(),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: inputName(),
+        )
       ],
     );
   }
@@ -140,6 +145,25 @@ class FormOneState extends State<FormOne> {
               );
             }
         )
+    );
+  }
+
+  Widget inputName() {
+    return StreamBuilder<String>(
+      stream: bloc.streamName,
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        return TextField(
+          onChanged: bloc.name,
+          style: const TextStyle(
+            fontSize: 18.0
+          ),
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 8.0),
+            hintText: 'Your Name',
+            labelText: 'Input Your Name'
+          ),
+        );
+      },
     );
   }
 
