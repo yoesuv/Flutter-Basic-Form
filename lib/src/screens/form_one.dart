@@ -28,7 +28,7 @@ class FormOneState extends State<FormOne> {
     super.initState();
     listImage.clear();
     listImage.add(null);
-    bloc = Provider.of<FormOneBloc>(context, listen: false);
+    bloc = FormOneBloc();
   }
 
   @override
@@ -51,7 +51,7 @@ class FormOneState extends State<FormOne> {
 
   @override
   void dispose(){
-    bloc.drainBloc();
+    // bloc.drainBloc();
     bloc.dispose();
     super.dispose();
   }
