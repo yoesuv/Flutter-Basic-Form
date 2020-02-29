@@ -33,10 +33,6 @@ class FormOneBloc {
     print('FormOneBloc # name : ${_name.value}');
   }
 
-  void drainBloc() {
-    _name.value = '';
-  }
-
   void dispose() {
     _resultRequestStoragePermission.close();
   }

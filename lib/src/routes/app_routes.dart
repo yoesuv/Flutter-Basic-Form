@@ -1,6 +1,8 @@
+import 'package:basic_form/src/blocs/form_one_blocs.dart';
 import 'package:basic_form/src/screens/home.dart';
 import 'package:basic_form/src/screens/form_one.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppRoutes {
 
@@ -15,10 +17,9 @@ class AppRoutes {
         );
         break;
       case FormOne.formRoute:
+        final Widget page = Provider<dynamic>(create: (_) => FormOneBloc(), child: FormOne());
         return MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) {
-              return FormOne();
-            }
+            builder: (_) => page
         );
         break;
       default:
